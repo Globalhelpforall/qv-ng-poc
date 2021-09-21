@@ -1,10 +1,10 @@
 const PROXY_CONFIG = {
-  '/users/**': {
-    target: 'https://api.github.com',
+  '*/api/*': {
+    target: "http://localhost:8085",
     changeOrigin: true,
     secure: false,
-    logLevel: 'debug',
-    onProxyReq: (proxyReq, req, res) => {
+    logLevel: 'debug'
+    //onProxyReq: (proxyReq, req, res) => {
       // const cookieMap = {
       //   SID: '',
       // };
@@ -15,7 +15,7 @@ const PROXY_CONFIG = {
       //   }
       // }
       // proxyReq.setHeader('cookie', cookie);
-    },
+    //},
   },
 };
 

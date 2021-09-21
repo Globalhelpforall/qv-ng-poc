@@ -352,6 +352,7 @@ export class Sr2mlComponent implements OnInit {
       },
       (error)=>{
           this.api.errorResponse(error);
+          console.log('Submission error')
       });
     }
   }
