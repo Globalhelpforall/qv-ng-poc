@@ -7,13 +7,13 @@
     <li navAccordionItem class="matero-sidemenu-item" routerLinkActive="active"
         *ngFor="let menuItem of menuList" [group]="menuItem.route" [type]="menuItem.type">
 
-      <a class="matero-sidemenu-link"
+      <!--<a class="matero-sidemenu-link"
          [routerLink]="buildRoute(parentRoute.concat([menuItem.route]))"
          *ngIf="menuItem.type==='link'" matRipple [matRippleDisabled]="!ripple">
         <ng-container [ngTemplateOutlet]="linkTypeTpl"
                       [ngTemplateOutletContext]="{item: menuItem, level: level}">
         </ng-container>
-      </a>
+      </a>-->
 
       <a class="matero-sidemenu-link" [href]="menuItem.route"
          *ngIf="menuItem.type==='extLink'" matRipple [matRippleDisabled]="!ripple">
