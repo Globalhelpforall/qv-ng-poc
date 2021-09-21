@@ -33,68 +33,6 @@
       ]
     },
     {
-      "route": "ais",
-      "name": "ais",
-      "type": "sub",
-      "icon": "lightbulb",
-      "label": {
-        "color": "indigo-500",
-        "value": "new"
-      },
-      "children": [
-        {
-          "route": "data-normalize",
-          "name": "data-normalize",
-          "type": "link"
-        },
-        {
-          "route": "training",
-          "name": "training",
-          "type": "link"
-        },
-        {
-          "route": "prediction",
-          "name": "prediction",
-          "type": "link"
-        }
-      ]
-    },
-    {
-      "route": "deep-inspector",
-      "name": "deep-inspector",
-      "type": "sub",
-      "icon": "search",
-      "label": {
-        "color": "indigo-500",
-        "value": "new"
-      },
-      "children": [
-        {
-          "route": "rl-assist",
-          "name": "rl-assist",
-          "type": "link"
-        }
-      ]
-    },
-    {
-      "route": "design",
-      "name": "design",
-      "type": "sub",
-      "icon": "color_lens",
-      "children": [
-        {
-          "route": "colors",
-          "name": "colors",
-          "type": "link"
-        },
-        {
-          "route": "icons",
-          "name": "icons",
-          "type": "link"
-        }
-      ]
-    },
-    {
       "route": "material",
       "name": "material",
       "type": "sub",

@@ -346,7 +346,7 @@ export class Sr2mlComponent implements OnInit {
       // this.showToast(this.model);
       this.api.get("raven/sr2ml", this.input).subscribe((data)=>{
         if(data.status == "success"){
-          this.showToast("SR2ML input Xml has been created successfully.");
+          this.showToast("SR2ML input XML has been created successfully. RAVEN is running SR2ML.");
         }
         
       },
