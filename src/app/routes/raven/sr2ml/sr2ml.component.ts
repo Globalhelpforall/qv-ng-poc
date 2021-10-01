@@ -78,7 +78,7 @@ export class Sr2mlComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: 'Choose an SR2ML model type. Default fault tree.',
               },
               wrappers: ['form-field'],
             },
@@ -98,7 +98,7 @@ export class Sr2mlComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: 'Choose an SR2ML model subtype.',
               },
               wrappers: ['form-field'],
             },
@@ -154,7 +154,7 @@ export class Sr2mlComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: 'Choose a distribution for the data.',
               },
               wrappers: ['form-field'],
             }
@@ -183,7 +183,7 @@ export class Sr2mlComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: 'Choose a sampling strategy.',
               },
               wrappers: ['form-field'],
             }
@@ -211,7 +211,7 @@ export class Sr2mlComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: 'Choose a base directory from which to run SR2ML.',
               },
               wrappers: ['form-field'],
             },
@@ -232,7 +232,16 @@ export class Sr2mlComponent implements OnInit {
                 label: 'Batch Size',
                 required: false,
               },
-            }
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'inputFile',
+              templateOptions: {
+                label: 'Input File',
+                required: false,
+              },
+            },
           ],
         }
       ],
