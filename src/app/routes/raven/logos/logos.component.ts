@@ -11,6 +11,7 @@ import { ApiService } from '../../../core/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./logos.component.scss']
 })
+
 export class LogosComponent implements OnInit {
   form = new FormGroup({});
   model: any = {};
@@ -22,7 +23,7 @@ export class LogosComponent implements OnInit {
         {
           key: 'models',
           wrappers: ['panel'],
-          templateOptions: { label: 'ExternalModel' },
+          templateOptions: { label: 'LOGOS Model' },
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
@@ -32,79 +33,33 @@ export class LogosComponent implements OnInit {
               templateOptions: {
                 label: 'Model Names',
                 options: [
-                  { value: "ET", name: 'Event Tree' },
-                  { value: "FT", name: 'Fault Tree' },              
-                  { value: "graph", name: 'graph' },
-                  { value: "markov", name: 'markov' },
-                ],
+                  { value: "knp", name: 'Knapsack' },
+                  { value: "mkp", name: 'Multiple Knapsack' },              
+                  { value: "inc_npv", name: 'Incremental NPV' },
+                  { value: "ensemble", name: 'Ensemble' },
+                ],//knapsack, battery replacement cashflow, incremental npv, capital investment, ensemble
                 labelProp: 'name',
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: ' ',
               },
               wrappers: ['form-field'],
-            },
-            {
-              className: 'col-sm-3',
-              type: 'combobox',
-              key: 'subType',
-              templateOptions: {
-                label: 'Sub Type',
-                options: [
-                  { value: "SR2ML.ETModel", name: 'SR2ML.ETModel' },
-                  { value: "SR2ML.FTModel", name: 'SR2ML.FTModel' },
-                  { value: "SR2ML.GraphModel", name: 'SR2ML.GraphModel' },
-                  { value: "SR2ML.MarkovModel", name: 'SR2ML.MarkovModel' },
-                ],
-                labelProp: 'name',
-                valueProp: (option) => option,
-                compareWith: (o1, o2) => o1.value === o2.value,
-                required: true,
-                description: 'This is a custom field type.',
-              },
-              wrappers: ['form-field'],
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'topEvents',
-              templateOptions: {
-                label: 'Top Events',
-                required: false,
-              },
-            },
-            {
-              className: 'col-sm-3',
-              key: 'map',
-              type: 'select',
-              templateOptions: {
-                label: 'Maps',
-                multiple: true,
-                valueProp: (option) => option,
-                compareWith: (o1, o2) => o1.value === o2.value,
-                options: [
-                  {label: 'BE1', value: 'statusBE1'},
-                  {label: 'BE2', value: 'statusBE2'},
-                  {label: 'BE3', value: 'statusBE3'},
-                  {label: 'BE4', value: 'statusBE4'}
-                ],
-              },
             }
           ],
         },
         {
-          key: 'distributions',
+          key: 'stats',
           wrappers: ['panel'],
-          templateOptions: { label: 'Distributions' },
+          templateOptions: { label: 'Distributions & Samplers' },
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
               className: 'col-sm-3',
               type: 'combobox',
-              key: 'names',
+              key: 'distribution',
               templateOptions: {
-                label: 'Names',
+                label: 'Select Distribution',
                 options: [
                   { value: "binomial", name: 'BinomialDistribution' },
                   { value: "bernoulli", name: 'BernoulliDistribution' },              
@@ -117,24 +72,16 @@ export class LogosComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: ' ',
               },
               wrappers: ['form-field'],
-            }
-          ],
-        },
-        {
-          key: 'samplers',
-          wrappers: ['panel'],
-          templateOptions: { label: 'Samplers' },
-          fieldGroupClassName: 'row',
-          fieldGroup: [
+            },
             {
               className: 'col-sm-3',
               type: 'combobox',
-              key: 'names',
+              key: 'sampler',
               templateOptions: {
-                label: 'Names',
+                label: 'Select Sampler',
                 options: [
                   { value: "MonteCarlo", name: 'MonteCarlo' },
                   { value: "Stratified", name: 'Stratified' },              
@@ -146,11 +93,141 @@ export class LogosComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: ' ',
               },
               wrappers: ['form-field'],
             }
           ],
+        },
+        {
+        key: 'variables',
+        wrappers: ['panel'],
+        templateOptions: { label: 'Variables' },
+        fieldGroup:[
+          {
+            key: 'xmlfile',
+            type: 'file',
+            templateOptions: {
+              required: false,
+              description:'Input a .xml seed file or enter variables below.',
+            },
+          },
+          {
+            className: 'col-sm-6',
+            type: 'input',
+            key: 'var1',
+            templateOptions: {
+              label: 'Variable',
+              required: false,
+              description:'',
+            },
+            hideExpression:'model.xmlfile',
+          },
+          {
+            className: 'col-sm-3',
+            key: 'val1',
+            type: 'input',
+            templateOptions: {
+              label: 'Value',
+            },
+            hideExpression:'model.xmlfile',
+          },
+          {
+            className: 'col-sm-6',
+            type: 'input',
+            key: 'var2',
+            templateOptions: {
+              label: 'Variable',
+              required: false,
+            },
+            hideExpression:'(!model.val1 && !model.var1) || model.xmlfile',
+          },
+          {
+            key: 'val2',
+            className: 'col-sm-3',
+            type: 'input',
+            templateOptions: {
+              label: 'Value',
+            },
+            hideExpression:'(!model.val1 && !model.var1) || model.xmlfile',
+          },
+          {
+            className: 'col-sm-6',
+            type: 'input',
+            key: 'var3',
+            templateOptions: {
+              label: 'Variable',
+              required: false,
+            },
+            hideExpression:'!model.val2 || model.xmlfile',
+          },
+          {
+            key: 'val3',
+            className: 'col-sm-3',
+            type: 'input',
+            templateOptions: {
+              label: 'Value',
+            },
+            hideExpression:'!model.val2 || model.xmlfile',
+          },
+          {
+            className: 'col-sm-6',
+            type: 'input',
+            key: 'var4',
+            templateOptions: {
+              label: 'Variable',
+              required: false,
+            },
+            hideExpression:'!model.val3 || model.xmlfile',
+          },
+          {
+            key: 'val4',
+            className: 'col-sm-3',
+            type: 'input',
+            templateOptions: {
+              label: 'Value',
+            },
+            hideExpression:'!model.val3 || model.xmlfile',
+          },
+          {
+            className: 'col-sm-6',
+            type: 'input',
+            key: 'var5',
+            templateOptions: {
+              label: 'Variable',
+              required: false,
+            },
+            hideExpression:'!model.val4 || model.xmlfile',
+          },
+          {
+            key: 'val5',
+            className: 'col-sm-3',
+            type: 'input',
+            templateOptions: {
+              label: 'Value',
+            },
+            hideExpression:'!model.val4 || model.xmlfile',
+          },
+          {
+            className: 'col-sm-6',
+            type: 'input',
+            key: 'var6',
+            templateOptions: {
+              label: 'Variable',
+              required: false,
+            },
+            hideExpression:'!model.val5 || model.xmlfile',
+          },
+          {
+            key: 'val6',
+            className: 'col-sm-3',
+            type: 'input',
+            templateOptions: {
+              label: 'Value',
+            },
+            hideExpression:'!model.val5 || model.xmlfile',
+          },
+        ]
         },
         {
           key: 'runinfo',
@@ -174,27 +251,28 @@ export class LogosComponent implements OnInit {
                 valueProp: (option) => option,
                 compareWith: (o1, o2) => o1.value === o2.value,
                 required: true,
-                description: 'This is a custom field type.',
+                description: 'Directory on this machine which contains data files.',
               },
               wrappers: ['form-field'],
             },
             {
               className: 'col-sm-3',
               type: 'input',
-              key: 'sequence',
+              key: 'outputDir',
               templateOptions: {
-                label: 'Sequence',
+                label: 'Output Directory',
                 required: false,
+                description: 'Relative to working directory. If none selected, will use working directory.',
               },
             },
             {
               className: 'col-sm-3',
               type: 'input',
-              key: 'batchSize',
+              key: 'inputFile',
               templateOptions: {
-                label: 'Batch Size',
+                label: 'Data File',
                 required: false,
-              },
+              }
             }
           ],
         }

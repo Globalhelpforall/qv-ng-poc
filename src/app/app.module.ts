@@ -24,8 +24,13 @@ import { FormlyConfigModule } from './formly-config.module';
 import { coreServices } from '@core/services';
 import { APP_CONFIG } from '@core/app-config';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FileValueAccessor } from './file-value-accessor';
+import { FormlyFieldFile } from './file-type.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,FileValueAccessor,FormlyFieldFile,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -38,6 +43,12 @@ import { APP_CONFIG } from '@core/app-config';
     ThemeModule,
     RoutesModule,
     SharedModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot({
+      types: [
+        { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
+      ],
+    }),
     FormlyConfigModule.forRoot(),
     ToastrModule.forRoot(),
     TranslateModule.forRoot({

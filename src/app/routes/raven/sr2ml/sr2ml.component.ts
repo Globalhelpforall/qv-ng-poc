@@ -197,7 +197,7 @@ export class Sr2mlComponent implements OnInit {
           fieldGroup: [
             {
               className: 'col-sm-3',
-              type: 'combobox',
+              type: 'input',
               key: 'workingDirectory',
               templateOptions: {
                 label: 'Working Directory',
@@ -218,10 +218,11 @@ export class Sr2mlComponent implements OnInit {
             {
               className: 'col-sm-3',
               type: 'input',
-              key: 'sequence',
+              key: 'outputDir',
               templateOptions: {
-                label: 'Sequence',
+                label: 'Output Directory',
                 required: false,
+                description: 'Relative to working directory. If none selected, will use working directory.',
               },
             },
             {
@@ -238,7 +239,7 @@ export class Sr2mlComponent implements OnInit {
               type: 'input',
               key: 'inputFile',
               templateOptions: {
-                label: 'Input File',
+                label: 'Data File',
                 required: false,
               },
             },
