@@ -21,6 +21,35 @@ export class LogosComponent implements OnInit {
     {      
       fieldGroup: [
         {
+          key: 'prevFile',
+          wrappers: ['panel'],
+          templateOptions: { label: 'Reload previous file:' },
+          fieldGroup:[
+            {
+              key: 'xmlfile',
+              className: 'col-sm',
+              type: 'file',
+              templateOptions: {
+                required: false,
+                description:'(optional) Load a previous .xml file to edit or re-run.',
+              }
+            },
+            {
+              type: 'button',
+              templateOptions: {
+                className: 'col-sm',
+                text: 'Load',
+                btnType: 'info',
+                onClick: ($event) => {
+                  //this.form.get('someInput').setValue('clicked!');
+                },
+                description: 'Click to populate parameters from xml',
+              }
+            }
+            // really need to figure out how to link this to a function--can I add a button?
+          ]
+        },
+        {
           key: 'models',
           wrappers: ['panel'],
           templateOptions: { label: 'LOGOS Model' },
@@ -230,6 +259,155 @@ export class LogosComponent implements OnInit {
         ]
         },
         {
+          key: 'knapsackChoices',
+          wrappers: ['panel'],
+          templateOptions: { label: 'Knapsack Options' },
+          fieldGroup:[
+            {
+              key: 'xmlfile',
+              type: 'file',
+              templateOptions: {
+                required: false,
+                description:'Input a .xml seed file or enter variables below.',
+              },
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'PF',
+              templateOptions: {
+                label: 'Penalty Factor',
+                required: false,
+                description:'',
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              className: 'col-sm-3',
+              key: '2val1',
+              type: 'input',
+              templateOptions: {
+                label: 'Penalty Factor Value',
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'outcome',
+              templateOptions: {
+                label: 'Outcome',
+                required: false,
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              key: '2val2',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Value',
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'choiceValue',
+              templateOptions: {
+                label: 'Choice Value',
+                required: false,
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              key: '2val3',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Choice Value Value',
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'knp1',
+              templateOptions: {
+                label: 'Knapsack ID 1',
+                required: false,
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              key: '2val4',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Value',
+              },
+              hideExpression:'model.xmlfile',
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'knp2',
+              templateOptions: {
+                label: 'Knapsack ID 2',
+                required: false,
+              },
+              hideExpression:'!model.2val4 || model.xmlfile',
+            },
+            {
+              key: '2val5',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Value',
+              },
+              hideExpression:'!model.2val4 || model.xmlfile',
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'knp3',
+              templateOptions: {
+                label: 'Knapsack ID 3',
+                required: false,
+              },
+              hideExpression:'!model.2val5 || model.xmlfile',
+            },
+            {
+              key: '2val6',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Value',
+              },
+              hideExpression:'!model.2val5 || model.xmlfile',
+            },
+            {
+              className: 'col-sm-6',
+              type: 'input',
+              key: 'knp4',
+              templateOptions: {
+                label: 'Knapsack ID 3',
+                required: false,
+              },
+              hideExpression:'!model.2val6 || model.xmlfile',
+            },
+            {
+              key: '2val7',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Knapsack ID 4',
+              },
+              hideExpression:'!model.2val6 || model.xmlfile',
+            },
+          ]
+          },
+        {
           key: 'runinfo',
           wrappers: ['panel'],
           templateOptions: { label: 'Run info' },
@@ -242,10 +420,8 @@ export class LogosComponent implements OnInit {
               templateOptions: {
                 label: 'Working Directory',
                 options: [
-                  { value: "binomial", name: 'ETmodel' },
-                  { value: "bernoulli", name: 'ETmodelTD' },              
-                  { value: "markov", name: 'FTmodel' },
-                  { value: "exponential", name: 'FTmodelTD' }
+                  { value: "mkp", name: 'Multiple Knapsack' },
+                  { value: "bkp", name: 'Basic Knapsack' },              
                 ],
                 labelProp: 'name',
                 valueProp: (option) => option,
@@ -273,6 +449,24 @@ export class LogosComponent implements OnInit {
                 label: 'Data File',
                 required: false,
               }
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'sequence',
+              templateOptions: {
+                label: 'Sequence',
+                required: false,
+              }
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'batchSize',
+              templateOptions: {
+                label: 'Batch Size',
+                required: false,
+              }
             }
           ],
         }
@@ -294,7 +488,7 @@ export class LogosComponent implements OnInit {
       // this.showToast(this.model);
       this.api.get("raven/logos", this.input).subscribe((data)=>{
         if(data.status == "success"){
-          this.showToast("LOGOS input Xml has been created successfully.");
+          this.showToast("LOGOS input xml has been created successfully.");
         }
         
       },

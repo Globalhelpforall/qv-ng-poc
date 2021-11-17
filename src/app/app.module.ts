@@ -28,9 +28,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FileValueAccessor } from './file-value-accessor';
 import { FormlyFieldFile } from './file-type.component';
+import { FormlyFieldButton } from './button-type.component';
+
 
 @NgModule({
-  declarations: [AppComponent,FileValueAccessor,FormlyFieldFile,],
+  declarations: [AppComponent,FileValueAccessor,FormlyFieldFile,FormlyFieldButton],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -46,7 +48,18 @@ import { FormlyFieldFile } from './file-type.component';
     ReactiveFormsModule,
     FormlyModule.forRoot({
       types: [
-        { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
+        {
+          name: 'button',
+          component: FormlyFieldButton,
+          wrappers: ['form-field'],
+          defaultOptions: {
+            templateOptions: {
+              btnType: 'default',
+              type: 'button',
+            },
+          },
+        },
+          { name: 'file', component: FormlyFieldFile, wrappers: ['form-field'] },
       ],
     }),
     FormlyConfigModule.forRoot(),
