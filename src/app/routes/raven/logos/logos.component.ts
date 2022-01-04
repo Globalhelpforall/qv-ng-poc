@@ -84,7 +84,7 @@ export class LogosComponent implements OnInit {
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
-              className: 'col-sm-3',
+              className: 'col-sm-6',
               type: 'combobox',
               key: 'distribution',
               templateOptions: {
@@ -92,10 +92,11 @@ export class LogosComponent implements OnInit {
                 options: [
                   { value: "binomial", name: 'BinomialDistribution' },
                   { value: "bernoulli", name: 'BernoulliDistribution' },              
-                  { value: "markov", name: 'MarkovCategorical' },
+                  { value: "categorical", name: 'Categorical' },
                   { value: "exponential", name: 'ExponentialDistribution' },
                   { value: "gamma", name: 'GammaDistribution' },
                   { value: "beta", name: 'BetaDistribution' },
+                  { value: "uniform", name: 'Uniform' },
                 ],
                 labelProp: 'name',
                 valueProp: (option) => option,
@@ -106,7 +107,7 @@ export class LogosComponent implements OnInit {
               wrappers: ['form-field'],
             },
             {
-              className: 'col-sm-3',
+              className: 'col-sm-6',
               type: 'combobox',
               key: 'sampler',
               templateOptions: {
@@ -125,7 +126,158 @@ export class LogosComponent implements OnInit {
                 description: ' ',
               },
               wrappers: ['form-field'],
-            }
+            },
+            {
+              key: 'distroName',
+              className: 'col-sm-6',
+              type: 'input',
+              templateOptions: {
+                label: 'Distribution name',
+                required: false,
+                default: 'uniform'
+              },
+              hideExpression: false,            
+            },
+            {
+              key: 'uniUpper',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Lower Bound',
+                required: false,
+              },
+              hideExpression: false,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'uniLower',
+              templateOptions: {
+                label: 'Upper Bound',
+                required: false,
+              },
+              hideExpression: false,
+            },
+            {
+              key: 'catOutcome1',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Name 1',
+                required: false,
+              },
+              hideExpression: true,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'catProb1',
+              templateOptions: {
+                label: 'Probability 1',
+                required: false,
+              },
+              hideExpression: true,
+            },
+            {
+              key: 'catOutcome2',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Name 2',
+                required: false,
+              },
+              hideExpression: true,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'catProb2',
+              templateOptions: {
+                label: 'Probability 2',
+                required: false,
+              },
+              hideExpression: true,
+            },
+            {
+              key: 'catOutcome3',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Name 3',
+                required: false,
+              },
+              hideExpression: true,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'catProb3',
+              templateOptions: {
+                label: 'Probability 3',
+                required: false,
+              },
+              hideExpression: true,
+            },
+            {
+              key: 'catOutcome4',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Name 4',
+                required: false,
+              },
+              hideExpression: true,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'catProb4',
+              templateOptions: {
+                label: 'Probability 4',
+                required: false,
+              },
+              hideExpression:true,
+            },
+            {
+              key: 'catOutcome5',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Name 5',
+                required: false,
+              },
+              hideExpression: true,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'catProb5',
+              templateOptions: {
+                label: 'Probability 5',
+                required: false,
+              },
+              hideExpression: true,
+            },
+            {
+              key: 'catOutcome6',
+              className: 'col-sm-3',
+              type: 'input',
+              templateOptions: {
+                label: 'Outcome Name 6',
+                required: false,
+              },
+              hideExpression: true,            
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'catProb6',
+              templateOptions: {
+                label: 'Probability 6',
+                required: false,
+              },
+              hideExpression: true,
+            },
           ],
         },
         {
