@@ -7,12 +7,12 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../../core/services';
 @Component({
   selector: 'app-logos',
-  templateUrl: './logos.component.html',
+  templateUrl: './logossolo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./logos.component.scss']
+  styleUrls: ['./logossolo.component.scss']
 })
 
-export class LogosComponent implements OnInit {
+export class LogosSoloComponent implements OnInit {
   form = new FormGroup({});
   model: any = {};
   input: any;
@@ -50,9 +50,9 @@ export class LogosComponent implements OnInit {
           ]
         },
         {
-          key: 'models',
+          key: 'problem',
           wrappers: ['panel'],
-          templateOptions: { label: 'LOGOS Model' },
+          templateOptions: { label: 'LOGOS Problem' },
           fieldGroupClassName: 'row',
           fieldGroup: [
             {
@@ -60,11 +60,18 @@ export class LogosComponent implements OnInit {
               type: 'combobox',
               key: 'modelName',
               templateOptions: {
-                label: 'Model Names',
+                label: 'Problem Type',
                 options: [
                   { value: "knp", name: 'Knapsack' },
                   { value: "mkp", name: 'Multiple Knapsack' },              
                   { value: "inc_npv", name: 'Incremental NPV' },
+                  { value: "mckp", name: 'MCKP' },
+                  { value: "droskp", name: 'droskp' },
+                  { value: "dromkp", name: 'dromkp' },
+                  { value: "dromckp", name: 'dromckp' },
+                  { value: "cvarskp", name: 'cvarskp' },
+                  { value: "cvarmkp", name: 'cvarmkp' },
+                  { value: "cvarmckp", name: 'cvarmckp' },
                   { value: "ensemble", name: 'Ensemble' },
                 ],//knapsack, battery replacement cashflow, incremental npv, capital investment, ensemble
                 labelProp: 'name',
@@ -74,363 +81,39 @@ export class LogosComponent implements OnInit {
                 description: ' ',
               },
               wrappers: ['form-field'],
-            }
-          ],
-        },
-        {
-          key: 'distros',
-          wrappers: ['panel'],
-          templateOptions: { label: 'Distributions' },
-          fieldGroupClassName: 'row',
-          fieldGroup: [
-            {
-              className: 'col-sm-6',
-              type: 'combobox',
-              key: 'distribution',
-              templateOptions: {
-                label: 'Select Distribution',
-                options: [
-                  { value: "binomial", name: 'BinomialDistribution' },
-                  { value: "bernoulli", name: 'BernoulliDistribution' },              
-                  { value: "categorical", name: 'Categorical' },
-                  { value: "exponential", name: 'ExponentialDistribution' },
-                  { value: "gamma", name: 'GammaDistribution' },
-                  { value: "beta", name: 'BetaDistribution' },
-                  { value: "uniform", name: 'Uniform' },
-                ],
-                labelProp: 'name',
-                valueProp: (option) => option,
-                compareWith: (o1, o2) => o1.value === o2.value,
-                required: true,
-                description: ' ',
-              },
-              wrappers: ['form-field'],
-            },            
-            {
-              key: 'distroName',
-              className: 'col-sm-6',
-              type: 'input',
-              templateOptions: {
-                label: 'Distribution name',
-                required: false,
-                default: 'uniform'
-              },
-              hideExpression: false,            
-            },
-            {
-              key: 'uniUpper',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Lower Bound',
-                required: false,
-              },
-              hideExpression: false,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'uniLower',
-              templateOptions: {
-                label: 'Upper Bound',
-                required: false,
-              },
-              hideExpression: false,
-            },
-            {
-              key: 'catOutcome1',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Outcome Name 1',
-                required: false,
-              },
-              hideExpression: true,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'catProb1',
-              templateOptions: {
-                label: 'Probability 1',
-                required: false,
-              },
-              hideExpression: true,
-            },
-            {
-              key: 'catOutcome2',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Outcome Name 2',
-                required: false,
-              },
-              hideExpression: true,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'catProb2',
-              templateOptions: {
-                label: 'Probability 2',
-                required: false,
-              },
-              hideExpression: true,
-            },
-            {
-              key: 'catOutcome3',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Outcome Name 3',
-                required: false,
-              },
-              hideExpression: true,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'catProb3',
-              templateOptions: {
-                label: 'Probability 3',
-                required: false,
-              },
-              hideExpression: true,
-            },
-            {
-              key: 'catOutcome4',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Outcome Name 4',
-                required: false,
-              },
-              hideExpression: true,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'catProb4',
-              templateOptions: {
-                label: 'Probability 4',
-                required: false,
-              },
-              hideExpression:true,
-            },
-            {
-              key: 'catOutcome5',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Outcome Name 5',
-                required: false,
-              },
-              hideExpression: true,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'catProb5',
-              templateOptions: {
-                label: 'Probability 5',
-                required: false,
-              },
-              hideExpression: true,
-            },
-            {
-              key: 'catOutcome6',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Outcome Name 6',
-                required: false,
-              },
-              hideExpression: true,            
-            },
-            {
-              className: 'col-sm-3',
-              type: 'input',
-              key: 'catProb6',
-              templateOptions: {
-                label: 'Probability 6',
-                required: false,
-              },
-              hideExpression: true,
             },
           ],
         },
-        {
-          key: 'samplers',
-          wrappers: ['panel'],
-          templateOptions: { label: 'Samplers' },
-          fieldGroupClassName: 'row',
-          fieldGroup: [
-            {
-              className: 'col-sm-6',
-              type: 'combobox',
-              key: 'sampler',
-              templateOptions: {
-                label: 'Select Sampler',
-                options: [
-                  { value: "MonteCarlo", name: 'MonteCarlo' },
-                  { value: "LatinHypercube", name: 'Latin Hypercube' },              
-                ],
-                labelProp: 'name',
-                valueProp: (option) => option,
-                compareWith: (o1, o2) => o1.value === o2.value,
-                required: true,
-                description: ' ',
-              },
-              wrappers: ['form-field'],
-            },
-            {
-              key: 'samplerName',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Sampler name',
-                required: false,
-                default: 'uniform'
-              },
-              hideExpression: false,            
-            },
-            {
-              key: 'samplerInit',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Sampler init:',
-                required: false,
-                default: '10'
-              },
-              hideExpression: false,            
-            },
-            {
-              key: 'sampleVar1',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Variable 1',
-                required: false,
-              },
-              hideExpression: false,            
-            },
-            {
-              key: 'samplerDistName1',
-              className: 'col-sm-3',
-              type: 'input',
-              hideExpression: 'model.distOrConst1',
-              templateOptions: {
-                label: 'Distribution name:',
-              },
-            },
-            {
-              key: 'samplerConstVal1',
-              className: 'col-sm-3',
-              type: 'input',
-              hideExpression: '!model.distOrConst1',
-              templateOptions: {
-                label: 'Constant value:',
-              },
-            },
-            {
-              key: 'distOrConst1',
-              type: 'checkbox',
-              templateOptions: { label: '' },
-              expressionProperties: {
-                'templateOptions.label': (model, formState) => {
-                  if (formState) {
-                    return 'Is variable 1 a constant?';
-                  } else {
-                    return 'Does this variable use a distribution?';
-                  }
-                },
-              },
-            },
-            {
-              key: 'sampleVar2',
-              className: 'col-sm-3',
-              type: 'input',
-              templateOptions: {
-                label: 'Variable 2',
-                required: false,
-              },
-              hideExpression: false,            
-            },
-            {
-              key: 'samplerDistName2',
-              className: 'col-sm-3',
-              type: 'input',
-              hideExpression: 'model.distOrConst2',
-              templateOptions: {
-                label: 'Distribution name:',
-              },
-            },
-            {
-              key: 'samplerConstVal2',
-              className: 'col-sm-3',
-              type: 'input',
-              hideExpression: '!model.distOrConst2',
-              templateOptions: {
-                label: 'Constant value:',
-              },
-            },
-            {
-              key: 'distOrConst2',
-              type: 'checkbox',
-              templateOptions: { label: '' },
-              expressionProperties: {
-                'templateOptions.label': (model, formState) => {
-                  if (formState) {
-                    return 'Is variable 2 a constant?';
-                  } else {
-                    return 'Does this variable use a distribution?';
-                  }
-                },
-              },
-            },
-
-//            {
-//              className: 'col-sm-3',
-//              type: 'input',
-//              key: 'sampleDistr1',
-//              templateOptions: {
-//                label: 'Distribution Name',
-//                required: false,
-//              },
-//              hideExpression: false,
-//            },
-          ],
-        },
-
 // TODO: check out multi-step form and ag-grid on formly wenbsite as potentially bettter formats
 
         {
-        key: 'variables',
+        key: 'sets',
         wrappers: ['panel'],
         templateOptions: { label: 'Variables' },
         fieldGroup:[
           {
-            key: 'xmlfile',
-            type: 'file',
+            className: 'col-sm-3',
+            type: 'combobox',
+            key: 'var1',
             templateOptions: {
+              label: 'Variable Type',
+              options: [
+                { value: "investments", name: 'investments' },
+                { value: "time_periods", name: 'time periods' },              
+                { value: "resources", name: 'resources' },
+                { value: "capitals", name: 'capitals' },
+                { value: "options", name: 'options' },
+              ],
+              labelProp: 'name',
+              valueProp: (option) => option,
+              compareWith: (o1, o2) => o1.value === o2.value,
               required: false,
-              description:'Input a .xml seed file or enter variables below.',
+              description: ' ',
             },
+            wrappers: ['form-field'],
           },
           {
             className: 'col-sm-6',
-            type: 'input',
-            key: 'var1',
-            templateOptions: {
-              label: 'Variable',
-              required: false,
-              description:'',
-            },
-            hideExpression:'model.xmlfile',
-          },
-          {
-            className: 'col-sm-3',
             key: 'val1',
             type: 'input',
             templateOptions: {
@@ -439,7 +122,7 @@ export class LogosComponent implements OnInit {
             hideExpression:'model.xmlfile',
           },
           {
-            className: 'col-sm-6',
+            className: 'col-sm-3',
             type: 'input',
             key: 'var2',
             templateOptions: {
@@ -744,7 +427,35 @@ export class LogosComponent implements OnInit {
                 label: 'Batch Size',
                 required: false,
               }
-            }
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'author',
+              templateOptions: {
+                label: 'Author',
+                required: false,
+              }
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'description',
+              templateOptions: {
+                label: 'Description',
+                required: false,
+              }
+            },
+            {
+              className: 'col-sm-3',
+              type: 'input',
+              key: 'classesTested',
+              templateOptions: {
+                label: 'Classes Tested',
+                required: false,
+              }
+            },
+
           ],
         }
       ],
@@ -763,7 +474,7 @@ export class LogosComponent implements OnInit {
       }
 
       // this.showToast(this.model);
-      this.api.get("raven/logos", this.input).subscribe((data)=>{
+      this.api.get("raven/logossolo", this.input).subscribe((data)=>{
         if(data.status == "success"){
           this.showToast("LOGOS input xml has been created successfully.");
         }

@@ -1,0 +1,12 @@
+<page-header></page-header>
+
+<mat-card>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form">
+    </formly-form>
+    <div align="end">
+      <button mat-raised-button color="primary" [disabled]="!form.valid">Submit</button>
+    </div>
+    
+  </form>
+</mat-card>

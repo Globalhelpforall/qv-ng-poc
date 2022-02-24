@@ -6,10 +6,12 @@ import { RavenRoutingModule } from './raven-routing.module';
 import { Sr2mlComponent } from './sr2ml/sr2ml.component';
 import { LogosComponent } from './logos/logos.component';
 
+import { LogosSoloComponent } from './logossolo/logossolo.component';
+
 
 const COMPONENTS_DYNAMIC = [];
 @NgModule({
-  declarations: [Sr2mlComponent, LogosComponent],
+  declarations: [Sr2mlComponent, LogosComponent, LogosSoloComponent],
   imports: [
     CommonModule,
     SharedModule,
