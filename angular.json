@@ -19,7 +19,7 @@
           "options": {
             "allowedCommonJsDependencies": ["@angularclass/hmr"],
             "aot": true,
-            "outputPath": "dist/ng-matero",
+            "outputPath": "dist/raven",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
