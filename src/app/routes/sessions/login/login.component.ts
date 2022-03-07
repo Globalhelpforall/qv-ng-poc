@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
     // Set user info
     this.settings.setUser({
       id: uid,
-      name: 'Aswin',
-      email: 'aswin1906@gmail.com',
+      name: 'QuantumVentura',
+      email: 'QuantumVentura@gmail.com',
       avatar: './assets/images/avatar.jpg',
     });
     // Set token info

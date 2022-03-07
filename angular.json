@@ -25,10 +25,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css"],
-            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js"]
+            "styles": ["src/styles.scss"],
+            "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
           },
           "configurations": {
             "production": {

@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'raven/sr2ml', pathMatch: 'full' },
       {
         path: 'dashboard',
         component: DashboardComponent,
@@ -27,55 +27,11 @@ const routes: Routes = [
         loadChildren: () => import('./raven/raven.module').then(m => m.RavenModule),
         data: { title: 'Raven', titleI18n: 'raven' },
       },
-      //{
-      //  path: 'ais',
-      //  loadChildren: () => import('./ais/ais.module').then(m => m.AisModule),
-      //  data: { title: 'AIS', titleI18n: 'ais' },
-      //},
-      //{
-      //  path: 'deep-inspector',
-      //  loadChildren: () => import('./deep-inspector/deep-inspector.module').then(m => m.DeepInspectorModule),
-      //  data: { title: 'Deep Inspector', titleI18n: 'deepinspector' },
-      //},
-      // {
-      //   path: 'design',
-      //   loadChildren: () => import('./design/design.module').then(m => m.DesignModule),
-      //   data: { title: 'Design', titleI18n: 'design' },
-      // },
       {
         path: 'material',
         loadChildren: () => import('./material/material.module').then(m => m.MaterialModule),
         data: { title: 'Material', titleI18n: 'material' },
       },
-      // {
-      //   path: 'media',
-      //   loadChildren: () => import('./media/media.module').then(m => m.MediaModule),
-      //   data: { title: 'Media', titleI18n: 'media' },
-      // },
-      // {
-      //   path: 'forms',
-      //   loadChildren: () => import('./forms/forms.module').then(m => m.FormsModule),
-      //   data: { title: 'Forms', titleI18n: 'forms' },
-      // },
-      // {
-      //   path: 'tables',
-      //   loadChildren: () => import('./tables/tables.module').then(m => m.TablesModule),
-      //   data: { title: 'Tables', titleI18n: 'tables' },
-      // },
-      // {
-      //   path: 'profile',
-      //   loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
-      //   data: { title: 'Profile', titleI18n: 'profile' },
-      // },
-      // {
-      //   path: 'sessions',
-      //   loadChildren: () => import('./sessions/sessions.module').then(m => m.SessionsModule),
-      //   data: { title: 'Sessions', titleI18n: 'sessions' },
-      // },
-      // {
-      //   path: 'helpers',
-      //   loadChildren: () => import('./helpers/helpers.module').then(m => m.HelpersModule),
-      // },
       {
         path: 'permissions',
         loadChildren: () =>

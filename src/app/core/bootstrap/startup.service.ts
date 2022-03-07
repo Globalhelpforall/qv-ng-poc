@@ -35,8 +35,8 @@ export class StartupService {
             // In a real app, user data will be fetched from API
             this.settings.setUser({
               id: 1,
-              name: 'Aswin',
-              email: 'aswin1906@gmail.com',
+              name: 'QuantumVentura',
+              email: 'quantumventura@gmail.com',
               avatar: './assets/images/avatar.jpg',
             });
           },

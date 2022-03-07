@@ -24,7 +24,9 @@
       "@testing": ["testing"],
       "@testing/*": ["testing/*"],
       "@env": ["environments"],
-      "@env/*": ["environments/*"]
+      "@env/*": ["environments/*"],
+      "@raven": ["app/raven"],
+      "@raven/*": ["app/raven/*"],
     }
   }
 }

@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ToastrService } from 'ngx-toastr';
 
 import { ApiService } from '../../../core/services';
+import { Sr2mlReportComponent } from '../';
 
 @Component({
   selector: 'app-sr2ml',
@@ -52,9 +54,10 @@ export class Sr2mlComponent implements OnInit {
   form = new FormGroup({});
   model: any = {};
   input: any;
+
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[] = [
-    {      
+    {
       fieldGroup: [
         {
           key: 'models',
@@ -70,7 +73,7 @@ export class Sr2mlComponent implements OnInit {
                 label: 'Model Names',
                 options: [
                   { value: "ET", name: 'Event Tree' },
-                  { value: "FT", name: 'Fault Tree' },              
+                  { value: "FT", name: 'Fault Tree' },
                   { value: "graph", name: 'graph' },
                   { value: "markov", name: 'markov' },
                 ],
@@ -109,6 +112,7 @@ export class Sr2mlComponent implements OnInit {
               templateOptions: {
                 label: 'Top Events',
                 required: false,
+                placeholder: 'Top Events',
               },
             },
             {
@@ -144,7 +148,7 @@ export class Sr2mlComponent implements OnInit {
                 label: 'Names',
                 options: [
                   { value: "binomial", name: 'BinomialDistribution' },
-                  { value: "bernoulli", name: 'BernoulliDistribution' },              
+                  { value: "bernoulli", name: 'BernoulliDistribution' },
                   { value: "markov", name: 'MarkovCategorical' },
                   { value: "exponential", name: 'ExponentialDistribution' },
                   { value: "gamma", name: 'GammaDistribution' },
@@ -174,7 +178,7 @@ export class Sr2mlComponent implements OnInit {
                 label: 'Names',
                 options: [
                   { value: "MonteCarlo", name: 'MonteCarlo' },
-                  { value: "Stratified", name: 'Stratified' },              
+                  { value: "Stratified", name: 'Stratified' },
                   { value: "Grid", name: 'Grid Based' },
                   { value: "Sparse Grid", name: 'Sparse Grid Collocation' },
                   { value: "Sobol", name: 'Sobol Decomposition' }
@@ -203,7 +207,7 @@ export class Sr2mlComponent implements OnInit {
                 label: 'Working Directory',
                 options: [
                   { value: "binomial", name: 'ETmodel' },
-                  { value: "bernoulli", name: 'ETmodelTD' },              
+                  { value: "bernoulli", name: 'ETmodelTD' },
                   { value: "markov", name: 'FTmodel' },
                   { value: "exponential", name: 'FTmodelTD' }
                 ],
@@ -249,103 +253,10 @@ export class Sr2mlComponent implements OnInit {
     }
   ];
 
-  // fields2: FormlyFieldConfig[] = [
-  //   {
-  //     fieldGroupClassName: 'row',
-  //     fieldGroup: [
-  //       {
-  //         className: 'col-sm-6',
-  //         type: 'input',
-  //         key: 'firstName',
-  //         templateOptions: {
-  //           label: 'First Name',
-  //           required: true,
-  //         },
-  //       },
-  //       {
-  //         className: 'col-sm-6',
-  //         type: 'input',
-  //         key: 'lastName',
-  //         templateOptions: {
-  //           label: 'Last Name',
-  //           required: true,
-  //         },
-  //         expressionProperties: {
-  //           'templateOptions.disabled': '!model.firstName',
-  //         },
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     fieldGroupClassName: 'row',
-  //     fieldGroup: [
-  //       {
-  //         className: 'col-sm-6',
-  //         type: 'input',
-  //         key: 'street',
-  //         templateOptions: {
-  //           label: 'Street',
-  //         },
-  //       },
-  //       {
-  //         className: 'col-sm-3',
-  //         type: 'combobox',
-  //         key: 'cityId',
-  //         templateOptions: {
-  //           label: 'City',
-  //           options: [
-  //             { id: 1, name: '北京' },
-  //             { id: 2, name: '上海' },
-  //             { id: 3, name: '广州' },
-  //             { id: 4, name: '深圳' },
-  //           ],
-  //           labelProp: 'name',
-  //           valueProp: 'id',
-  //           required: true,
-  //           description: 'This is a custom field type.',
-  //         },
-  //         wrappers: ['form-field'],
-  //       },
-  //       {
-  //         className: 'col-sm-3',
-  //         type: 'input',
-  //         key: 'zip',
-  //         templateOptions: {
-  //           type: 'number',
-  //           label: 'Zip',
-  //           max: 99999,
-  //           min: 0,
-  //           pattern: '\\d{5}',
-  //         },
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     type: 'textarea',
-  //     key: 'otherInput',
-  //     templateOptions: {
-  //       label: 'Other Input',
-  //     },
-  //   },
-  //   {
-  //     type: 'checkbox',
-  //     key: 'otherToo',
-  //     templateOptions: {
-  //       label: 'Other Checkbox',
-  //     },
-  //   },
-  // ];
-
-  constructor(private toastr: ToastrService, private api:  ApiService) {}
+  constructor(private toastr: ToastrService, private api:  ApiService, public dialog: MatDialog) {}
 
   ngOnInit() {}
 
-  // submit() {
-  //   if (this.form.valid) {
-  //     this.showToast(this.model);
-  //   }
-  // }
-  
   submit() {
     if (this.form.valid) {
       this.input = {};
@@ -356,9 +267,16 @@ export class Sr2mlComponent implements OnInit {
       // this.showToast(this.model);
       this.api.get("raven/sr2ml", this.input).subscribe((data)=>{
         if(data.status == "success"){
-          this.showToast("SR2ML input XML has been created successfully. RAVEN is running SR2ML.");
+          // this.showToast("SR2ML input XML has been created successfully. RAVEN is running SR2ML.");
+          if(data?.result?.raven_report){
+            let config= { data: {'raven_report': JSON.parse(data["result"]['raven_report']) } }
+            this.openReportDialog(Sr2mlReportComponent, config)
+          }
+          else{
+            this.showToast("SR2ML couldn't find any report.");
+          }
         }
-        
+
       },
       (error)=>{
           this.api.errorResponse(error);
@@ -369,6 +287,18 @@ export class Sr2mlComponent implements OnInit {
 
   showToast(obj: any) {
     this.toastr.success(JSON.stringify(obj));
+  }
+
+  openReportDialog(component, config= {}, ...args): void {
+    const dialogRef = this.dialog.open(component, {
+      width: '40%',
+      data: {},
+      ...config
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }
