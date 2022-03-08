@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 
 import { ApiService } from '../../../core/services';
-import { Sr2mlReportComponent } from '../';
+import { Sr2mlReportComponent } from './../sr2ml-report/sr2ml-report.component';
 
 @Component({
   selector: 'app-sr2ml',
@@ -15,40 +15,6 @@ import { Sr2mlReportComponent } from '../';
   styleUrls: ['./sr2ml.component.scss']
 })
 export class Sr2mlComponent implements OnInit {
-
-  // form = new FormGroup({});
-  // model = { email: 'email@gmail.com' };
-  // fields: FormlyFieldConfig[] = [
-  //   {
-  //     key: 'text',
-  //     type: 'input',
-  //     templateOptions: {
-  //       label: 'Text',
-  //       placeholder: 'Type here to see the other field become enabled...',
-  //       required: true,
-  //     },
-  //   },
-  //   {
-  //     key: 'text2',
-  //     type: 'input',
-  //     templateOptions: {
-  //       label: 'Hey!',
-  //       placeholder: 'This one is disabled if there is no text in the other input',
-  //     },
-  //     expressionProperties: {
-  //       'templateOptions.disabled': '!model.text',
-  //     },
-  //   },
-  //   {
-  //     key: 'email',
-  //     type: 'input',
-  //     templateOptions: {
-  //       label: 'Email address',
-  //       placeholder: 'Enter email',
-  //       required: true,
-  //     },
-  //   },
-  // ];
 
   // Advanced Layout
   form = new FormGroup({});
