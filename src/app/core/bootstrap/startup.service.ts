@@ -37,7 +37,7 @@ export class StartupService {
               id: 1,
               name: 'QuantumVentura',
               email: 'quantumventura@gmail.com',
-              avatar: './assets/images/avatar.jpg',
+              avatar: './assets/images/qv.png',
             });
           },
           () => reject(),

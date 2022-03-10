@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       id: uid,
       name: 'QuantumVentura',
       email: 'QuantumVentura@gmail.com',
-      avatar: './assets/images/avatar.jpg',
+      avatar: './assets/images/qv.png',
     });
     // Set token info
     this.token.set({ token, uid, username });
