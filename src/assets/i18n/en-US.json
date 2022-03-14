@@ -106,15 +106,18 @@
     "login": "Login",
     "have_no_account": "Don't have an account",
     "create_one": "Click here to create one",
-    "please_enter": "Please enter"
+    "please_enter": "Please enter your"
   },
   "register": {
     "welcome": "Welcome",
-    "title": "It only takes a few seconds to create your account",
+    "title": "Create your account",
     "confirm_password": "Confirm Password",
     "agree": "I have read and agree to the terms of service",
     "have_an_account": "Already have an account",
-    "register": "Create account"
+    "register": "Create account",
+    "firstname": "First Name",
+    "lastname": "LastName",
+    "email": "Email"
   },
   "paginator": {
     "items_per_page_label": "Items per page:",

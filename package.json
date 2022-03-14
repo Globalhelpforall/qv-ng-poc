@@ -57,6 +57,7 @@
     "moment-timezone": "^0.5.32",
     "ng": "^0.0.0",
     "ng-matero": "^12.4.0",
+    "ngx-cookie": "^5.0.2",
     "ngx-permissions": "^8.1.1",
     "ngx-progressbar": "^6.1.0",
     "ngx-toastr": "^13.2.0",

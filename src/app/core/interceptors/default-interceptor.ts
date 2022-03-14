@@ -11,6 +11,7 @@ import {
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { environment } from '@env/environment';
+import { CookieService } from 'ngx-cookie';
 
 import { ToastrService } from 'ngx-toastr';
 import { TokenService } from '../authentication/token.service';
@@ -22,7 +23,8 @@ export class DefaultInterceptor implements HttpInterceptor {
     private router: Router,
     private toastr: ToastrService,
     private token: TokenService,
-    private settings: SettingsService
+    private settings: SettingsService,
+    public _cookieSvc?: CookieService
   ) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -36,11 +38,16 @@ export class DefaultInterceptor implements HttpInterceptor {
 
     // All APIs need JWT authorization
     const headers = {
-      // 'Accept': 'application/json',
+      'Accept': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Accept-Language': this.settings.language,
       'Authorization': `Bearer ${this.token.get().token}`,
+      'X-CSRFToken': this._cookieSvc.get("csrftoken")
     };
+
+    // if(this.settings.user?.name){
+    //   headers['username']= this.settings.user.name
+    // }
 
     const newReq = req.clone({ setHeaders: headers, withCredentials: true });
     return next.handle(newReq);

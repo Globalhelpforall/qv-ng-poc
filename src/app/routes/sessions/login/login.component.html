@@ -1,23 +1,25 @@
 <div class="w-full h-full" fxLayout="row wrap">
-  <mat-card class="mat-elevation-z4 m-auto" style="max-width: 380px;">
+  <mat-card class="mat-elevation-z4 m-auto" style="max-width: 450px;">
     <mat-card-title class="text-center m-b-24">{{'login.title' | translate}}!</mat-card-title>
 
     <form class="form-field-full" [formGroup]="loginForm">
-
+      <mat-error *ngIf="validationErrors?.detail">
+        {{validationErrors?.detail}}
+      </mat-error>
       <mat-form-field appearance="outline">
-        <mat-label>{{'login.username' | translate}}: quantum</mat-label>
-        <input matInput placeholder="quantum" formControlName="username" required>
+        <mat-label>{{'login.username' | translate}}</mat-label>
+        <input matInput placeholder="{{'login.please_enter' | translate}}{{'login.username' | translate}}" formControlName="username" required>
         <mat-error *ngIf="username.invalid">
-          {{'login.please_enter' | translate}} <strong>quantum</strong>
+          {{'login.please_enter' | translate}} <strong>{{'login.username' | translate}}</strong>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>{{'login.password' | translate}}: quantum</mat-label>
+        <mat-label>{{'login.password' | translate}}</mat-label>
         <input matInput placeholder="quantum" type="password"
                formControlName="password" required>
         <mat-error *ngIf="password.invalid">
-          {{'login.please_enter' | translate}} <strong>quantum</strong>
+          {{'login.please_enter' | translate}} <strong>{{'login.password' | translate}}</strong>
         </mat-error>
       </mat-form-field>
 

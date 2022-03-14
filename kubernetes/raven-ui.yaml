@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: raven-elasticsearch
+  name: raven-elasticsearch
+  namespace: raven-namespace
+spec:
+  selector:
+    matchLabels:
+      app: raven-elasticsearch
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: raven-elasticsearch
+    spec:
+      containers:
+      - image: aswin1906/raven-elasticsearch-6.8.3:1.0
+        name: raven-elasticsearch
+        ports:
+        - containerPort: 9200
+        resources: {}
+      restartPolicy: Always
+status: {}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: raven-elasticsearch-svc
+  name: raven-elasticsearch-svc
+  namespace: raven-namespace
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 9200
+    targetPort: 9200
+    nodePort: 30011
+  selector:
+    app: raven-elasticsearch
+status:
+  loadBalancer: {}

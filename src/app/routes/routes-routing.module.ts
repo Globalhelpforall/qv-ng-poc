@@ -16,7 +16,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'raven/sr2ml', pathMatch: 'full' },
+      { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
       {
         path: 'dashboard',
         component: DashboardComponent,
@@ -51,7 +51,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'dashboard' },
+  { path: '**', redirectTo: 'auth/login' },
 ];
 
 @NgModule({

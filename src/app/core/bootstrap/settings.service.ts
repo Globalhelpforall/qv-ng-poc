@@ -3,7 +3,7 @@ import { LocalStorageService } from '@shared/services/storage.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AppSettings, defaults } from '../settings';
 
-export const USER_KEY = 'usr';
+export const USER_KEY = 'username';
 
 export interface User {
   id: number;

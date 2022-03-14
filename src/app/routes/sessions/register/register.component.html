@@ -1,11 +1,44 @@
 <div class="w-full h-full" fxLayout="row wrap">
   <mat-card class="mat-elevation-z4 m-auto" style="max-width: 380px;">
     <mat-card-title class="m-b-24">
-      {{'register.welcome' | translate}}, <br />
       {{'register.title' | translate}}
     </mat-card-title>
 
     <form class="form-field-full" [formGroup]="registerForm">
+      <mat-error *ngIf="validationErrors?.keys?.length>0">
+        <table>
+          <tr *ngFor="let errKey of validationErrors.keys">
+            <td>
+              {{errKey}}
+            </td>
+            <td>
+              <ul>
+                <li *ngFor="let err of validationErrors.errors[errKey]">
+                  {{err}}
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </table>
+      </mat-error>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'register.firstname' | translate}}</mat-label>
+        <input matInput formControlName="first_name" required>
+        <mat-error *ngIf="registerForm.get('first_name').invalid">
+          {{'validations.required' | translate}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'register.lastname' | translate}}</mat-label>
+        <input matInput formControlName="last_name" required>
+        <mat-error *ngIf="registerForm.get('last_name').invalid">
+          {{'validations.required' | translate}}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{'register.email' | translate}}</mat-label>
+        <input matInput formControlName="email">
+      </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>{{'login.username' | translate}}</mat-label>
         <input matInput formControlName="username" required>
@@ -24,11 +57,11 @@
 
       <mat-form-field appearance="outline">
         <mat-label>{{'register.confirm_password' | translate}}</mat-label>
-        <input matInput type="password" formControlName="confirmPassword" required>
-        <mat-error *ngIf="registerForm.get('confirmPassword').hasError('required')">
+        <input matInput type="password" formControlName="confirm_password" required>
+        <mat-error *ngIf="registerForm.get('confirm_password').hasError('required')">
           {{'validations.required' | translate}}
         </mat-error>
-        <mat-error *ngIf="registerForm.get('confirmPassword').hasError('confirm')"
+        <mat-error *ngIf="registerForm.get('confirm_password').hasError('confirm')"
                    translate [translateParams]="{value: 'login.password' | translate}">
           {{'validations.inconsistent'}}
         </mat-error>
@@ -38,7 +71,7 @@
         <mat-checkbox>{{'register.agree' | translate}}</mat-checkbox>
       </div>
 
-      <button class="w-full" mat-raised-button color="primary">
+      <button class="w-full" mat-raised-button color="primary" (click)="register()">
         {{'register.register' | translate}}
       </button>
 

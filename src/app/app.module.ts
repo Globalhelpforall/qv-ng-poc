@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HttpClient, HttpClientXsrfModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieModule } from 'ngx-cookie';
 
 import { CoreModule } from './core/core.module';
 import { ThemeModule } from './theme/theme.module';
@@ -71,6 +72,7 @@ import { FormlyFieldButton } from './button-type.component';
         deps: [HttpClient],
       },
     }),
+    CookieModule.forRoot()
   ],
   providers: [httpInterceptorProviders, appInitializerProviders, coreServices],
   bootstrap: [AppComponent],
